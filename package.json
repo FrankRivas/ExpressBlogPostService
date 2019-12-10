@@ -1,0 +1,33 @@
+{
+	"name": "expressblogpostservice",
+	"version": "1.0.0",
+	"description": "Blog posts crud with Express",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"watch": "nodemon --watch **/*.ts --exec ts-node index.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/FrankRivas/ExpressBlogPostService.git"
+	},
+	"author": "Frank Rivas",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/FrankRivas/ExpressBlogPostService/issues"
+	},
+	"homepage": "https://github.com/FrankRivas/ExpressBlogPostService#readme",
+	"devDependencies": {
+		"eslint": "^6.7.2",
+		"eslint-config-prettier": "^6.7.0",
+		"eslint-plugin-prettier": "^3.1.1",
+		"nodemon": "^2.0.1",
+		"prettier": "^1.19.1",
+		"ts-node": "^8.5.4",
+		"typescript": "^3.7.3"
+	},
+	"dependencies": {
+		"@types/mongoose": "^5.5.32",
+		"@types/node": "^12.12.16"
+	}
+}
