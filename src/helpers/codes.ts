@@ -1,17 +1,19 @@
+// Next Feature  (Coming Soon)//
+/*
 import express from 'express'
 
 enum codes {
 	'OK' = 200,
-	'Created' = 201,
-	'No Content' = 204,
-	'Bad Request' = 400,
-	'Unauthorized' = 401,
-	'Forbidden' = 403,
-	'Not Found' = 404,
-	'Method Not Allowed' = 405,
-	'Conflict' = 409,
-	'Internal Server Error' = 500,
-	'Service Unavailable' = 503,
+	'CREATED' = 201,
+	'NO CONTENT' = 204,
+	'BAD REQUEST' = 400,
+	'UNAUTHORIZED' = 401,
+	'FORBIDDEN' = 403,
+	'NOT FOUND' = 404,
+	'METHOD NOT ALLOWED' = 405,
+	'CONFLICT' = 409,
+	'INTERNAL SERVER ERROR' = 500,
+	'SERVIDE UNAVAILABLE' = 503,
 }
 
 export function obtainDataCode(res: express.Response, code: number, jsonData?: any): void {
@@ -22,3 +24,4 @@ export function obtainDataCode(res: express.Response, code: number, jsonData?: a
 		res.write(JSON.stringify({ code: code, msg: `${codes[code]}` }))
 	}
 }
+*/
