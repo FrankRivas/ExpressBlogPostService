@@ -22,7 +22,9 @@ routerPost.post('/', validBody, async (req, res) => {
 routerPost.get('/:id', validateIdLen, async (req, res) => {
 	const result = await getPost(req.params.id)
 	const code = result !== undefined ? 200 : 404
-	res.status(code).send(result)
+	result !== undefined
+		? res.status(code).send(result)
+		: res.status(code).send({ msg: 'Bad Request', error: ['Invalid Id'] })
 })
 
 routerPost.delete('/:id', validateIdLen, async (req, res) => {
