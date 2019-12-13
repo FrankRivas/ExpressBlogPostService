@@ -23,10 +23,17 @@ export async function createComment(req: express.Request): Promise<mongoose.Docu
 	}
 }
 
+// Next Feature (Coming Soon)//
+/*
 export async function getComment(id: string): Promise<mongoose.Document[] | undefined> {
 	console.log(id)
-	const post = await Post.aggregate([{ $unwind: '$comments' }, { $match: { _id: '5df2ab907633b4315c9c2828' } }])
+	const post = await Post.aggregate([
+		{ $unwind: '$comments' },
+		{ $match: { _id: id } },
+		{ $group: { _id: '$comments' } },
+	])
 	if (post !== null) {
 		return post
 	}
 }
+*/

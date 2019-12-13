@@ -11,8 +11,10 @@ commentRouter.post('/', validateBodyComment, async (req, res) => {
 	res.end()
 })
 
+// Next Feature //
+/*
 commentRouter.get('/:idComment', validateIdLen, async (req, res) => {
 	const result = await getComment(req.params.idComment)
 	const code = result !== undefined ? 200 : 404
 	res.status(code).send(result)
-})
+})*/
