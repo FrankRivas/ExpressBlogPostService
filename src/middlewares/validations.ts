@@ -3,6 +3,7 @@ import { validate, Validator } from 'class-validator'
 import { Post } from '../dto/post'
 import { Comment } from '../dto/comment'
 
+// Middleware to validate the body of the requests made from the Posts urls
 export async function validBody(req: express.Request, res: express.Response, next: Function): Promise<void> {
 	const post = new Post(req.body)
 	const result = await validate(post, { validationError: { target: false } })
@@ -14,6 +15,7 @@ export async function validBody(req: express.Request, res: express.Response, nex
 	next()
 }
 
+// Middleware to validate Content-Type of all kind of request
 export function validContentType(req: express.Request, res: express.Response, next: Function): void {
 	console.log(req.headers['content-type'])
 	if (req.headers['content-type'] !== 'application/json') {
@@ -27,6 +29,7 @@ export function validContentType(req: express.Request, res: express.Response, ne
 	next()
 }
 
+// Middleware to validate if the passed id is a valid MongoId (used on PUT, GET and DELETE requests)
 export function validateIdLen(req: express.Request, res: express.Response, next: Function): void {
 	const validator = new Validator()
 	const result = validator.isMongoId(req.params.id)
@@ -38,6 +41,7 @@ export function validateIdLen(req: express.Request, res: express.Response, next:
 	next()
 }
 
+// Middleware to validate the body of the request made from Comments endpoints
 export async function validateBodyComment(req: express.Request, res: express.Response, next: Function): Promise<void> {
 	const post = new Comment(req.body)
 	const result = await validate(post, { validationError: { target: false } })
