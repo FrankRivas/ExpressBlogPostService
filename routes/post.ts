@@ -10,6 +10,7 @@ routerPost.use(express.json())
 routerPost.get('/', async (req, res) => {
 	const result = await getPosts()
 	res.status(200).send(result)
+	res.end()
 })
 
 routerPost.post('/', validBody, async (req, res) => {
@@ -24,13 +25,14 @@ routerPost.get('/:id', validateIdLen, async (req, res) => {
 	const code = result !== undefined ? 200 : 404
 	result !== undefined
 		? res.status(code).send(result)
-		: res.status(code).send({ msg: 'Bad Request', error: ['Invalid Id'] })
+		: res.status(code).send({ msg: 'Not Found', error: ['Invalid Id'] })
+	res.end()
 })
 
 routerPost.delete('/:id', validateIdLen, async (req, res) => {
 	const result = await deletePost(req.params.id)
 	const code = result.n > 0 ? 204 : 404
-	res.status(code)
+	result.n > 0 ? res.status(code) : res.status(code).send({ msg: 'Not Found', error: ['Invalid Id'] })
 	res.end()
 })
 
@@ -38,7 +40,10 @@ routerPost.put('/:id', validateIdLen, validBody, async (req, res) => {
 	const result = await updatePost(req.params.id, req)
 	console.log(result)
 	const code = result !== undefined ? 200 : 404
-	res.status(code).send(result)
+	result !== undefined
+		? res.status(code).send(result)
+		: res.status(code).send({ msg: 'Not Found', error: ['Invalid Id'] })
+	res.end()
 })
 
 routerPost.use('/:id/comments', validateIdLen, commentRouter)
