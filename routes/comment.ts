@@ -1,6 +1,6 @@
 import express from 'express'
-import { createComment, getComment } from '../src/services/comment'
-import { validateBodyComment, validateIdLen } from '../src/middlewares/validations'
+import { createComment } from '../src/services/comment'
+import { validateBodyComment } from '../src/middlewares/validations'
 export const commentRouter = express.Router({ mergeParams: true })
 commentRouter.use(express.json())
 
