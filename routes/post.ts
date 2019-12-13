@@ -1,14 +1,10 @@
 import express from 'express'
-import {
-	createPost,
-	getPosts,
-	getPost,
-	deletePost,
-	updatePost
-} from '../src/posts'
-import { createComment } from '../src/comment'
-import bodyParser from 'body-parser'
+import { createPost, getPosts, getPost, deletePost, updatePost } from '../src/services/posts'
+import { commentRouter } from './comment'
+import { validBody, validateIdLen } from '../src/middlewares/validations'
+
 export const routerPost = express.Router()
+
 routerPost.use(express.json())
 
 routerPost.get('/', async (req, res) => {
@@ -16,27 +12,31 @@ routerPost.get('/', async (req, res) => {
 	res.status(200).send(result)
 })
 
-routerPost.post('/', async (req, res) => {
+routerPost.post('/', validBody, async (req, res) => {
 	const result = await createPost(req)
-	res.status(200).send(result)
+	const code = result ? 201 : 500
+	res.status(code).send(result)
+	res.end()
 })
 
-routerPost.get('/:id', async (req, res) => {
+routerPost.get('/:id', validateIdLen, async (req, res) => {
 	const result = await getPost(req.params.id)
-	res.status(200).send(result)
+	const code = result !== undefined ? 200 : 404
+	res.status(code).send(result)
 })
 
-routerPost.delete('/:id', async (req, res) => {
+routerPost.delete('/:id', validateIdLen, async (req, res) => {
 	const result = await deletePost(req.params.id)
-	res.status(200).send(result)
+	const code = result.n > 0 ? 204 : 404
+	res.status(code)
+	res.end()
 })
 
-routerPost.put('/:id', async (req, res) => {
+routerPost.put('/:id', validateIdLen, validBody, async (req, res) => {
 	const result = await updatePost(req.params.id, req)
-	res.status(200).send(result)
+	console.log(result)
+	const code = result !== undefined ? 200 : 404
+	res.status(code).send(result)
 })
 
-routerPost.post('/:id/comments', async (req, res) => {
-	const result = await createComment(req)
-	res.status(200).send(result)
-})
+routerPost.use('/:id/comments', validateIdLen, commentRouter)

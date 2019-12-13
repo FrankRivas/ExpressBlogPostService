@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-export function conectDB() {
+export function conectDB(): void {
 	try {
 		mongoose.connect('mongodb://localhost/BlogAPI')
 	} catch {

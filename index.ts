@@ -2,12 +2,12 @@ import express from 'express'
 import morgan from 'morgan'
 import { conectDB } from './database/conection'
 import { routerPost } from './routes/post'
-import { validUrl } from './src/middlewares/validUrl'
+import { validContentType } from './src/middlewares/validations'
 import bodyParser from 'body-parser'
 
 const app = express()
 app.use(morgan('tiny'))
-app.use(validUrl)
+app.use(validContentType)
 conectDB()
 app.use('/api/posts', routerPost)
 app.use(express.json())
